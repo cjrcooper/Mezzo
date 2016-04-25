@@ -1,0 +1,83 @@
+
+.navbar {
+  border: 0px;
+  margin-bottom: 0px;
+}
+
+.navbar-form {
+  box-shadow: none;
+  text-align: center;
+  padding-bottom: 15px;
+  border: 0px;
+}
+
+.navbar-form > .form-group {
+  width: 300px;
+}
+
+.navbar-form > .form-group > .form-control {
+  width: 300px;
+}
+
+.form-group {
+  width: 300px;
+  margin: auto;
+}
+
+.form-control {
+  width: 300px;
+  border: 0px;
+  background-color: #012136;
+  border-bottom: 1px solid;
+  border-radius: 0px;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
+nav > .container-fluid {
+    background-color: #012136;
+    color: #fff;
+    padding-top: 25px;
+}
+
+.navbar-default .navbar-nav > li > a {color: #999999; font-size: 14pt}
+.navbar-default .navbar-nav > li > a:hover{color: #999999; font-size: 14pt}
+.navbar-default .navbar-nav > li > a:focus{color: #999999; font-size: 14pt}
+.navbar-default .navbar-nav > li > a:visited{color: #999999; font-size: 14pt}
+.navbar-default .navbar-nav > li > a:active{color: #999999; font-size: 14pt}
+
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: black;
+  background-color: white;
+  background-image: none;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: transparent;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+#bs-example-navbar-collapse-1 {
+  background-color: #012136;
+  border: 1px solid #012136;
+}
+
+#search-bar {
+
+}

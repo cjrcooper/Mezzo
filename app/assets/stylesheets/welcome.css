@@ -1,14 +1,13 @@
 
 #welcome-container {
   padding: 30px;
-  height: 100%;
+  height: auto;
   width: 100%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.32);
 }
 
 #welcome-block-one {
   height: 100vh;
-  background-image: url("http://image.shutterstock.com/z/stock-vector-set-of-social-people-on-world-map-with-speech-bubbles-in-different-languages-male-and-female-faces-322881275.jpg");
   background-repeat: no-repeat;
   padding: 30px;
 }
@@ -16,14 +15,12 @@
 
 #welcome-block-two {
   height: 100vh;
-  background-image: url("http://image.shutterstock.com/z/stock-vector-set-of-social-people-on-world-map-with-speech-bubbles-in-different-languages-male-and-female-faces-322881275.jpg");
   background-repeat: no-repeat;
   padding: 30px;
 }
 
 #welcome-block-three {
   height: 100vh;
-  background-image: url("http://image.shutterstock.com/z/stock-vector-set-of-social-people-on-world-map-with-speech-bubbles-in-different-languages-male-and-female-faces-322881275.jpg");
   background-repeat: no-repeat;
   padding: 30px;
 }

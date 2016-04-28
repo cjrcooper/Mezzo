@@ -15,6 +15,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'backbone-on-rails'
+gem 'react-rails', '~> 1.6', '>= 1.6.2'
+
 
 gem 'devise', '~> 3.5', '>= 3.5.6'
 

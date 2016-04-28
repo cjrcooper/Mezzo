@@ -3,13 +3,29 @@ nav {
   margin-bottom: 0px;
 }
 
+.navbar-hamburger {
+  display: block;
+}
+
 .navbar {
   border: 0px;
   margin-bottom: 0px;
   position: fixed;
-  margin-top: -10px;
+  margin-top: -20px;
   width: 100%;
   border-radius: 0px;
+}
+
+.navbar-header {
+  width: 100%;
+}
+
+.navbar-toggle {
+  margin-left: 50px;
+}
+
+.navbar-brand {
+  margin-right: 50px;
 }
 
 .navbar-form {
@@ -86,6 +102,37 @@ nav > .container-fluid {
   border: 1px solid #012136;
 }
 
-#search-bar {
 
+#side-nav {
+  position: fixed;
+  background-color: white;
+  border-right: 1px solid black;
+  z-index: 99;
+  min-width: 300px;
+  height: 100%;
+  left: -300px;
+}
+
+.side-nav-header {
+  height: 30px;
+  background-color: #012136;
+}
+
+.side-menu-list {
+  width: auto;
+  height: auto;
+}
+
+.side-menu-list > a > li{
+  text-decoration: none;
+}
+
+
+#overlay {
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 98;
+    display:none;
 }

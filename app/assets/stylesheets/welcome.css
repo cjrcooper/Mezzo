@@ -4,6 +4,7 @@
   height: auto;
   width: 100%;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.32);
+  padding-top: 82px;
 }
 
 #welcome-block-one {
@@ -20,6 +21,12 @@
 }
 
 #welcome-block-three {
+  height: 100vh;
+  background-repeat: no-repeat;
+  padding: 30px;
+}
+
+#welcome-block-four {
   height: 100vh;
   background-repeat: no-repeat;
   padding: 30px;

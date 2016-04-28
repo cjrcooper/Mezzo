@@ -42,6 +42,7 @@
 
  #main-container {
    width: auto;
+   min-height: 100vh;
    height: auto;
    background-color: #fff;
    margin-left: 50px;

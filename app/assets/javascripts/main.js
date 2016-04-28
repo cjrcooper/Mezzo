@@ -1,19 +1,17 @@
 
-// add Marin to main-container as you scroll from top
-$(window).on( 'scroll', function(){
+// Slide out menu
+$(document).ready(function(){
 
-  var scrollDownHeightValue = $(this).scrollTop();
+  $('#hamburger-menu-slider').on('click', function(){
+      $('#side-nav').animate({left: "+=300"});
+      $('#overlay').css('display', 'block');
+    });
 
-  console.log(scrollDownHeightValue)
+  $('#overlay, #close').on('click', function(){
+    $('#side-nav').animate({left: "-=300"});
+    setTimeout(function(){
+      $('#overlay').css('display', 'none');
+    }, 450)
+  })
 
-  if ( scrollDownHeightValue > 124){
-    $('.navbar').css({
-      'borderBottom': '25px solid #E0E0E0',
-      '-webkit-box-shadow': 'none',
-      'box-shadow': '#E0E0E0'
-    })
-  }
-  if ( scrollDownHeightValue < 124) {
-    $('.navbar').css({'borderBottom': '0px'})
-  }
 });

@@ -1,6 +1,17 @@
 <div id="welcome-container">
   <div id="welcome-block-one">
-    <h1>A</h1>
+    <script type="text/jsx">
+    var chrisTest = React.createClass({
+
+      render: function(){
+          return (
+            <h2>My Name is Chris</h2>
+          );
+      }
+
+      React.render(<chrisTest />, $('#welcome-block-one'));
+    });
+    </script>
   </div>
   <div id="welcome-block-two">
     <h1>B</h1>

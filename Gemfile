@@ -16,6 +16,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'backbone-on-rails'
 gem 'react-rails', '~> 1.6', '>= 1.6.2'
+gem 'pry-rails'
 
 
 gem 'devise', '~> 3.5', '>= 3.5.6'

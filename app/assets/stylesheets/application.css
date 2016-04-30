@@ -14,6 +14,16 @@
  *= require_self
  */
 
+/*Primary colour palette*/
+
+/*
+#242424 - Black
+#67C7EE - Sky Blue
+#5C7F91 - Light Greyish
+#F42C71 - Pink
+#62E73D - Greenish
+*/
+
 
  html {
    height: 100%;
@@ -48,6 +58,7 @@
    margin-left: 50px;
    margin-right: 50px;
    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.32);
+   padding-top: 100px;
  }
 
  #footer {

@@ -20,6 +20,7 @@ gem 'pry-rails'
 
 
 gem 'devise', '~> 3.5', '>= 3.5.6'
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

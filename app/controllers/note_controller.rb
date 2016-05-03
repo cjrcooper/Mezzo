@@ -1,8 +1,9 @@
 class NoteController < ApplicationController
 
   def index
-    @notes = current_user.notes.all
-    render :json => @notes
+    @Users = User.all
+    @Notes = current_user.notes.select("id, title, content, category").all
+    render :json => @Notes
   end
 
 end

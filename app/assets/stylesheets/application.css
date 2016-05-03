@@ -12,17 +12,8 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui
  */
-
-/*Primary colour palette*/
-
-/*
-#242424 - Black
-#67C7EE - Sky Blue
-#5C7F91 - Light Greyish
-#F42C71 - Pink
-#62E73D - Greenish
-*/
 
 
  html {
@@ -59,6 +50,8 @@
    margin-right: 50px;
    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.32);
    padding-top: 100px;
+   padding-left: 50px;
+   padding-right: 50px;
  }
 
  #footer {

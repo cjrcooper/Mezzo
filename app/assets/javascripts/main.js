@@ -1,4 +1,17 @@
 
+var app = app || {};
+
+$(document).ready(function() {
+
+    app.router = new app.AppRouter();
+
+    Backbone.history.start();
+
+  });
+
+
+
+
 // Slide out menu
 $(document).ready(function(){
 
@@ -15,3 +28,7 @@ $(document).ready(function(){
   })
 
 });
+
+$(document).ready(function(){
+  $( ".note" ).draggable({containment: "#main-container"});
+})

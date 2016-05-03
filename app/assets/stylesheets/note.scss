@@ -1,3 +1,28 @@
 // Place all the styles related to the Note controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.note {
+  width: 250px;
+  height: 250px;
+  max-width: 250px;
+  max-height: 250px;
+  display: inline-block;
+  overflow: hidden;
+  border: 0px solid #000;
+  box-shadow: 2px 2px 0px rgba(255, 0, 0, 0.35);
+  padding: 20px;
+  background-color: rgba(255, 0, 0, 0.19);
+  margin: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note > p {
+
+}
+
+
+.note-content {
+}

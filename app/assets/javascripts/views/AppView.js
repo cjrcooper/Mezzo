@@ -1,3 +1,4 @@
+
 var app = app || {};
 
 app.AppView = Backbone.View.extend({
@@ -8,7 +9,12 @@ app.AppView = Backbone.View.extend({
   },
 
   render: function() {
+
+
       var appViewTemplate = $('#appViewTemplate').html();
       this.$el.html(appViewTemplate);
     }
+
+
+
 });

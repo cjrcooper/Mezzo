@@ -6,8 +6,10 @@ app.AppRouter = Backbone.Router.extend({
     },
 
     introduction: function() {
-        var appView = new app.AppView();
-        appView.render();
+        var appNoteView = new app.NoteView();
+        app.Note.fetch().done( function(){
+            appNoteView.render();
+        });
     },
 
 });

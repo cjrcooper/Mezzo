@@ -5,10 +5,11 @@ $(document).ready(function() {
 
     app.router = new app.AppRouter();
 
+    app.Note = new app.Note();
+
     Backbone.history.start();
 
   });
-
 
 
 
@@ -27,8 +28,18 @@ $(document).ready(function(){
     }, 450)
   })
 
-});
+  var navHeight = $("nav").css("height");
+  $('#main-container').css({
+    paddingTop: navHeight
+  });
 
-$(document).ready(function(){
-  $( ".note" ).draggable({containment: "#main-container"});
-})
+
+  $( window ).resize(function() {
+    var navHeight = $("nav").css("height");
+
+    $('#main-container').css({
+      paddingTop: navHeight
+    });
+  });
+
+});

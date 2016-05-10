@@ -158,21 +158,21 @@
 
 .note-title-container[contentEditable=true]:empty:before {
   content: 'Title';
-  font-size: 16pt;
+  font-size: 12pt;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.42);
 }
 
 .note-category-container[contentEditable=true]:empty:before {
   content: 'Category';
-  font-size: 16pt;
+  font-size: 12pt;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.42);
 }
 
 .note-content-container[contentEditable=true]:empty:before {
   content: 'Note';
-  font-size: 16pt;
+  font-size: 12pt;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.42);
 }
@@ -188,7 +188,7 @@
 
 .note-current-language, .note-target-language{
   outline: none;
-  background-color: #FFEB3B;
+  background-color: rgba(255, 235, 59, 0);
   border: none;
   font-size: 14pt;
 }

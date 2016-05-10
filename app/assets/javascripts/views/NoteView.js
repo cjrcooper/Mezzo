@@ -1,4 +1,5 @@
 var app = app || {};
+var k;
 
 app.NoteView = Backbone.View.extend({
   el: '#main',
@@ -122,10 +123,32 @@ app.NoteView = Backbone.View.extend({
         $('<option data-language-abbr="' + x + '">' + y + '</option>').appendTo('.note-current-language, .note-target-language');
       });
 
+
+
+
+      $('.noteOverlay').find('.note-title-container, .note-content-container, .note-category-container').on('mouseup', function(){
+        var selectedText = window.getSelection().toString()
+        var encodedText = encodeURI(selectedText)
+        k = encodedText;
+        console.log(encodedText);
+      });
+
+      $('.note-translate').on('click', function(){
+
+        var currentLan = $('.note-current-language option:selected').data('language-abbr');
+        var targetLan = $('.note-target-language option:selected').data('language-abbr');
+
+        var translatedMessage = $.get('https://www.googleapis.com/language/translate/v2?key=AIzaSyAWxlzAAXIz59VqFH5pElpmEzwuPJF0ZTw&prettyprint&source=' + currentLan +'&target=' + targetLan + '&callback=translateText&q=' + k).done(function(){
+          console.log(translatedMessage.responseText);
+        });
+      });
+
+
     });
 
     $("#note-overlay").on("click", function(e){
       var target = $(e.target);
+      $('.noteOverlay').find('.note-translate').remove();
       if (target.is("#note-overlay")) {
         $("#note-overlay").css({"display": "none"})
         var newNotesInfo = $('.noteOverlay').children('.note-details').html();
@@ -156,6 +179,7 @@ app.NoteView = Backbone.View.extend({
       $(this).closest('.note').children('.note-draggable-area').css({'background-color': selectedColor});
 
     })
+
 
   }
 });

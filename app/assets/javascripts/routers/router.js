@@ -7,9 +7,11 @@ app.AppRouter = Backbone.Router.extend({
 
     introduction: function() {
         var appNoteView = new app.NoteView();
-        app.Note.fetch().done( function(){
-            appNoteView.render();
-        });
+        app.Language.fetch().done(function(){
+            app.Note.fetch().done( function(){
+              appNoteView.render();
+          });
+        })
     },
 
 });

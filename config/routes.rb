@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
   get '/notes' => 'note#index'
+  get '/languages' => 'language#index'
 
 end

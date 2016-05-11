@@ -2,5 +2,5 @@ var app = app || {};
 
 app.Notes = Backbone.Collection.extend({
   url: '/notes',
-  model: app.Note
+  model: app.Notes
 });

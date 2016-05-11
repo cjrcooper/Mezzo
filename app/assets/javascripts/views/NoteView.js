@@ -1,5 +1,6 @@
 var app = app || {};
-var k;
+var highlightedText;
+var selectedNoteId;
 
 app.NoteView = Backbone.View.extend({
   el: '#main',
@@ -11,15 +12,38 @@ app.NoteView = Backbone.View.extend({
     this.$el.html(appNoteViewTemplate);
 
     this.populateNote();
+    this.newNote();
+    this.deleteNote();
 
   },
 
+
+  newNote: function(){
+  $('#new-note').on('click', function(){
+      var makeNote = new app.Note
+      makeNote.save().done(function () {
+        app.notes.fetch().done(function () {
+          app.appNoteView.render();
+        });
+      });
+    })
+  },
+
+  deleteNote: function(){
+  $('.note-delete').on('click', function(){
+      var x = window.confirm('are you sure?')
+      var y = $(this).closest('.note').attr('id')
+      if( x === true ){
+
+      }
+    })
+  },
 
 
 
   populateNote: function(){
 
-    var note = app.Note.attributes;
+    var note = app.notes.attributes;
     var language = app.Language.attributes;
     var noteListElement = $('.notes-list');
 
@@ -30,8 +54,20 @@ app.NoteView = Backbone.View.extend({
        content: '<div class="note-content-container">' + this.content + '</div>',
        category: '<div class="note-category-container">' + this.category + '</div>',
       }
-      noteListElement.append('<li class="note"><div class="note-draggable-area"><span class="glyphicon glyphicon-align-justify pull-right"></span></div><div class="note-details">' + x.title + x.category + x.content +'</div></li>');
+      noteListElement.append('<li class="note" data-note-source-lang="'+ this.current_language +'" data-note-target-lang="' + this.target_language + '" id="' + this.id + '"><div class="note-draggable-area"><span class="glyphicon glyphicon-align-justify pull-right"></span></div><div class="note-details">' + x.title + x.category + x.content +'</div></li>');
+
+
+      if(this.title === null){
+        $('.note-title-container').empty();
+      }
+      if(this.category === null){
+        $('.note-category-container').empty();
+      }
+      if(this.content === null){
+        $('.note-content-container').empty();
+      }
     })
+
 
     $( ".note" ).resizable({
       minHeight: 150,
@@ -98,6 +134,7 @@ app.NoteView = Backbone.View.extend({
     $(".note-edit").on("click", function(){
       //fade out current note
       $(this).closest('.note').animate({opacity: 0}, 0.2)
+      selectedNoteId = $(this).closest('.note').attr('id');
 
       // Display the overlay and clone the note and add it to the body
     $("#note-overlay").css({"display": "block"})
@@ -112,7 +149,9 @@ app.NoteView = Backbone.View.extend({
       });
       $('.noteOverlay').children('.note-options-area').addClass('large-note-details');
 
-      $(noteTranslate).prependTo('.note-edit-options');
+      var translateOption = $('.large-note-details').children('.note-edit-options')
+
+      $(noteTranslate).prependTo(translateOption);
       $('.noteOverlay').find('.note-color-options').css({'display': 'none'});
 
       $('<div class="language-selection-options">' + noteCurrentLanguage + noteTargetLanguage + '</div>').appendTo('.large-note-details');
@@ -124,37 +163,65 @@ app.NoteView = Backbone.View.extend({
       });
 
 
+      var selectedNoteCurrentLang = $(this).closest('.note').data('note-source-lang');
+      var selectedNoteTargetLang = $(this).closest('.note').data('note-target-lang');
+      var s = $('.note-current-language option[data-language-abbr="' + selectedNoteCurrentLang + '"]').attr('selected', 'selected');
+      var q = $('.note-target-language option[data-language-abbr="' + selectedNoteTargetLang + '"]').attr('selected', 'selected');
 
 
-      $('.noteOverlay').find('.note-title-container, .note-content-container, .note-category-container').on('mouseup', function(){
-        var selectedText = window.getSelection().toString()
-        var encodedText = encodeURI(selectedText)
-        k = encodedText;
-        console.log(encodedText);
+
+      $('.noteOverlay').find('.note-title-container, .note-content-container, .note-category-container').on('focusout', function(){
+        if( $('.noteOverlay').find('.note-content-container').is(':empty') ){
+          return;
+        } else {
+          var selectedText = window.getSelection().toString()
+          $('.highlight').contents().unwrap();
+          var spn = '<span class="highlight">' + selectedText + '</span>';
+
+          var text = $('.noteOverlay').find('.note-content-container').text();
+            $('.noteOverlay').find('.note-content-container').html(text.replace(selectedText, spn));
+          var encodedText = encodeURI(selectedText)
+          highlightedText = encodedText;
+        }
       });
 
       $('.note-translate').on('click', function(){
-
         var currentLan = $('.note-current-language option:selected').data('language-abbr');
         var targetLan = $('.note-target-language option:selected').data('language-abbr');
 
-        var translatedMessage = $.get('https://www.googleapis.com/language/translate/v2?key=AIzaSyAWxlzAAXIz59VqFH5pElpmEzwuPJF0ZTw&prettyprint&source=' + currentLan +'&target=' + targetLan + '&callback=translateText&q=' + k).done(function(){
-          console.log(translatedMessage.responseText);
+        var translatedMessage = $.get('https://www.googleapis.com/language/translate/v2?key=AIzaSyAWxlzAAXIz59VqFH5pElpmEzwuPJF0ZTw&prettyprint&source=' + currentLan +'&target=' + targetLan + '&q=' + highlightedText).done(function(){
+
+          var text = translatedMessage.responseText;
+          var textnew = JSON.parse(text)
+          var translatedText = textnew.data.translations[0].translatedText;
+          var t = $.find('.highlight');
+          $(t[0]).html(translatedText);
         });
       });
-
-
     });
+
+
+
+
+
+
+
+
 
     $("#note-overlay").on("click", function(e){
       var target = $(e.target);
-      $('.noteOverlay').find('.note-translate').remove();
       if (target.is("#note-overlay")) {
         $("#note-overlay").css({"display": "none"})
         var newNotesInfo = $('.noteOverlay').children('.note-details').html();
+        $('.note-translate').remove()
         $('.current-note').children('.note-details').html(newNotesInfo);
         $('.noteOverlay').remove();
         $(".note").animate({opacity: 1}, 0.5);
+
+
+        $('selectedNoteId')
+
+
         setbottomMenuOptions();
       }
     });

@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     app.router = new app.AppRouter();
 
-    app.Note = new app.Note();
+    app.notes = new app.Note();
     app.Language = new app.Language();
 
     Backbone.history.start();

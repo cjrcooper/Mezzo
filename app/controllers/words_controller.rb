@@ -1,9 +1,8 @@
-class NotesController < ApplicationController
+class WordsController < ApplicationController
 
   def index
-    @users = User.all
-    @notes = current_user.notes.select("id, title, content, category, current_language, target_language").all.order("id DESC")
-    render :json => @notes
+    @words = Word.all
+    render :json => @words
   end
 
   def create

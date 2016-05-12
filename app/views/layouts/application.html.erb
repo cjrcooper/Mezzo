@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Mezzo</title>
+  <meta name="google-site-verification" content="C9MdQ8HDJpUSYP-7Rb3gYzUG7-YAL7ifEvTAW2MnHEI" />
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -47,21 +48,12 @@
           <%= link_to "Sign Up", '/users/sign_up'%>
         <% end %>
         </div>
-
-        <div id="search-bar">
-          <form class="navbar-form col-xl-9" role="search">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-          </form>
-        </div>
       </div>
     <!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
     <div class="sub-nav">
-      <div class="sub-nav-option"><p>Notes</p></div>
-      <div class="sub-nav-option"><p>Chat</p></div>
-      <div class="sub-nav-option"><p>Decks</p></div>
+      <div class="sub-nav-option" id="Notes"><p>Notes</p></div>
+      <div class="sub-nav-option" id="Decks"><p>Decks</p></div>
     </div>
   </nav>
 

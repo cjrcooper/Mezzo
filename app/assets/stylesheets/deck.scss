@@ -1,0 +1,46 @@
+.new-deck-container {
+  padding: 20px;
+}
+
+.deck-title-container {
+    width: 100%;
+    height: 40px;
+    border-radius: 2px;
+    background-color: #F44336;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.32);
+    color: rgb(255, 255, 255);
+    font-size: 12pt;
+    margin-bottom: 15px;
+    position: relative;
+    &:hover{
+      margin-left: -2px;
+      box-shadow: 5px 5px 3px rgba(0, 0, 0, 0.32);
+    }
+}
+
+.deck-title-container:hover .deck-options-right {
+  transition: all 1s ease 1s;
+  display: block;
+}
+
+
+.deck-options-left {
+    height: 40px;
+    width: 100%;
+    text-align: left;
+    text-align: center;
+}
+
+.deck-options-right {
+  position: absolute;
+  height: 40px;
+  margin-top: -40px;
+  text-align: right;
+  width: 100%;
+  display: none;
+  transition: all 1s ease 1s;
+}
+
+.deck-options-icons > span{
+  padding: 10px;
+}

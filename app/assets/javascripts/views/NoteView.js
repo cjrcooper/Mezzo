@@ -4,6 +4,17 @@ var selectedNoteId;
 
 app.NoteView = Backbone.View.extend({
   el: '#main',
+
+  events: {
+        'click #Decks': 'renderDeckView',
+    },
+
+    renderDeckView: function(){
+      app.router.navigate('loadDeck', true);
+    },
+
+
+
   render: function() {
 
     var appNoteView = $('#appNoteViewTemplate').html();
@@ -32,13 +43,12 @@ app.NoteView = Backbone.View.extend({
   deleteNote: function(){
   $('.note-delete').on('click', function(){
       var x = window.confirm('are you sure?')
-      var y = parseInt($(this).closest('.note').attr('id'));
-      if( x === true ){
-        $.each(app.notes.attributes, function(){
-          if (y === this.id){
-            console.log(this.id)
-          }
-        })
+      if ( x ) {
+        var $parentListItem = $(this).closest("li");
+        var postId = $parentListItem.data("postid");
+        $parentListItem.remove();
+        app.notes.get( postId ).destroy();
+        app.notes.remove( postId );
       }
     })
   },
@@ -47,27 +57,27 @@ app.NoteView = Backbone.View.extend({
 
   populateNote: function(){
 
-    var note = app.notes.attributes;
+    var notes = app.notes.models;
     var language = app.Language.attributes;
     var noteListElement = $('.notes-list');
 
 
-    $.each(note, function(){
+    $.each(notes, function(){
       var x = {
-       title: '<div class="note-title-container">' + this.title + '</div>',
-       content: '<div class="note-content-container">' + this.content + '</div>',
-       category: '<div class="note-category-container">' + this.category + '</div>',
+       title: '<div class="note-title-container">' + this.get("title") + '</div>',
+       content: '<div class="note-content-container">' + this.get("content") + '</div>',
+       category: '<div class="note-category-container">' + this.get("category") + '</div>',
       }
-      noteListElement.append('<li class="note" data-note-source-lang="'+ this.current_language +'" data-note-target-lang="' + this.target_language + '" id="' + this.id + '"><div class="note-draggable-area"><span class="glyphicon glyphicon-align-justify pull-right"></span></div><div class="note-details">' + x.title + x.category + x.content +'</div></li>');
+      noteListElement.append('<li class="note" data-note-source-lang="'+ this.get("current_language") +'" data-note-target-lang="' + this.get("target_language") + '" id="note_' + this.get("id") + '" data-postid="' + this.get("id") + '"><div class="note-draggable-area"><span class="glyphicon glyphicon-align-justify pull-right"></span></div><div class="note-details">' + x.title + x.category + x.content +'</div></li>');
 
 
-      if(this.title === null){
+      if(this.get("title") === null){
         $('.note-title-container').empty();
       }
-      if(this.category === null){
+      if(this.get("category") === null){
         $('.note-category-container').empty();
       }
-      if(this.content === null){
+      if(this.get("content") === null){
         $('.note-content-container').empty();
       }
     })
@@ -143,15 +153,16 @@ app.NoteView = Backbone.View.extend({
       // Display the overlay and clone the note and add it to the body
     $("#note-overlay").css({"display": "block"})
       var x = $(this).closest('.note').clone().addClass('noteOverlay');
-      x.prependTo("body");
 
+      x.prependTo("body");
       x.resizable({ disabled: true});
 
-      $(this).closest('.note').addClass('current-note');
-      $('.noteOverlay').children('.note-details').children().each(function(){
-        $(this).attr('contenteditable', 'true');
-      });
-      $('.noteOverlay').children('.note-options-area').addClass('large-note-details');
+        $(this).closest('.note').addClass('current-note');
+          $('.noteOverlay').children('.note-details').children().each(function(){
+            $(this).attr('contenteditable', 'true');
+          });
+
+          $('.noteOverlay').children('.note-options-area').addClass('large-note-details');
 
       var translateOption = $('.large-note-details').children('.note-edit-options')
 

@@ -5,13 +5,19 @@ $(document).ready(function() {
 
     app.router = new app.AppRouter();
 
-    app.notes = new app.Note();
+    app.note = new app.Note();
+    app.deck = new app.Deck();
+    app.word = new app.Word();
     app.Language = new app.Language();
 
     Backbone.history.start();
 
   });
 
+
+$('#Decks').on('click', function(){
+
+})
 
 
 // Slide out menu

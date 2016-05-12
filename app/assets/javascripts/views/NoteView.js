@@ -32,9 +32,13 @@ app.NoteView = Backbone.View.extend({
   deleteNote: function(){
   $('.note-delete').on('click', function(){
       var x = window.confirm('are you sure?')
-      var y = $(this).closest('.note').attr('id')
+      var y = parseInt($(this).closest('.note').attr('id'));
       if( x === true ){
-
+        $.each(app.notes.attributes, function(){
+          if (y === this.id){
+            console.log(this.id)
+          }
+        })
       }
     })
   },

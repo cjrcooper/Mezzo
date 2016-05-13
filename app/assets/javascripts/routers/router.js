@@ -33,11 +33,11 @@ app.AppRouter = Backbone.Router.extend({
         })
     },
 
-    showdecks: function(){
-      app.decks = new app.Decks();
-      app.appDeckView = new app.DeckView();
-        app.decks.fetch().done(function(){
-          app.appDeckView.render();
+    showdeck: function(){
+      app.words = new app.Words();
+      app.appWordView = new app.WordView();
+        app.words.fetch().done(function(){
+          app.appWordView.render();
         })
     }
 

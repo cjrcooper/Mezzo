@@ -1,4 +1,7 @@
 <div id="main">
+    <% if !current_user %>
+      <img style="width: 100%;" src="assets/bear.png">
+    <% end %>
 </div>
 
 <!--  introduction to the site stuff below -->
@@ -8,6 +11,8 @@
       <p>Test</p>
     </div>
 </script>
+
+
 
 <script type="text/template" id='appNoteViewTemplate'>
   <div class="new-note-container">
@@ -20,7 +25,20 @@
 </script>
 
 <script type="text/template" id='appDeckViewTemplate'>
+  <div class="new-note-container">
+    <button id="new-deck">New Deck</button>
+  </div>
   <div class="new-deck-container">
-      <button id="new-deck">New Deck</button>
     </div>
+</script>
+
+
+<script type="text/template" id='appWordViewTemplate'>
+  <div class="next-buttons">
+    <button id="left-arrow"><span class="fa fa-caret-left left-arrow"></span></button>
+    <button id="right-arrow"><span class="fa fa-caret-right right-arrow"></span></button>
+  </div>
+  <div class="new-word-container">
+    <div class="word-list-container"></div>
+  </div>
 </script>

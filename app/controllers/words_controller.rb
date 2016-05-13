@@ -6,11 +6,6 @@ class WordsController < ApplicationController
   end
 
   def create
-    note = Note.new note_params
-    if note.save
-      current_user.notes << note
-      render :json => note
-    end
   end
 
   def show

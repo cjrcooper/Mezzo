@@ -5,14 +5,6 @@ var selectedNoteId;
 app.NoteView = Backbone.View.extend({
   el: '#main',
 
-  events: {
-        'click #Decks': 'renderDeckView',
-    },
-
-    renderDeckView: function(){
-      app.router.navigate('loadDeck', true);
-    },
-
 
 
   render: function() {
@@ -39,6 +31,8 @@ app.NoteView = Backbone.View.extend({
       });
     })
   },
+
+
 
   deleteNote: function(){
   $('.note-delete').on('click', function(){
@@ -103,6 +97,7 @@ app.NoteView = Backbone.View.extend({
     var noteColor = '<span class="note-color fa fa-paint-brush"></span>';
     var noteDelete = '<span class="note-delete fa fa-trash"></span>';
     var noteEdit = '<span class="note-edit fa fa-pencil"></span>';
+    var noteAddToDeck = '<br><span class="note-add-to-deck fa fa-th-list"></span>';
 
     var colorOne = '<div class="colorOne"></div>';
     var colorTwo = '<div class="colorTwo"></div>';
@@ -113,7 +108,7 @@ app.NoteView = Backbone.View.extend({
     var returnOptions = '<div class="returnOptions"><span class="glyphicon glyphicon-arrow-down"></span></div>'
 
 
-    $(".note").append('<div class="note-options-area"><div class="note-edit-options">' + noteEdit + noteColor + noteDelete +'</div><div class="note-color-options">' + returnOptions + colorOne + colorTwo + colorThree + colorFour + colorFive + colorSix +'</div></div>');
+    $(".note").append('<div class="note-options-area"><div class="note-edit-options">' + noteEdit + noteColor + noteDelete +'</div><div class="note-color-options">' + returnOptions + colorOne + colorTwo + colorThree + colorFour + colorFive +'</div></div>');
 
 
     var setbottomMenuOptions = function(){
@@ -168,8 +163,11 @@ app.NoteView = Backbone.View.extend({
 
       $(noteTranslate).prependTo(translateOption);
       $('.noteOverlay').find('.note-color-options').css({'display': 'none'});
-
       $('<div class="language-selection-options">' + noteCurrentLanguage + noteTargetLanguage + '</div>').appendTo('.large-note-details');
+
+      $('.large-note-details').css('marginTop', '0px');
+
+      $('.noteOverlay').find('.note-edit, .note-color, .note-delete').remove();
 
       var languageList = $.each(language, function(){
         var x = this.abbreviation;
@@ -182,6 +180,8 @@ app.NoteView = Backbone.View.extend({
       var selectedNoteTargetLang = $(this).closest('.note').data('note-target-lang');
       var s = $('.note-current-language option[data-language-abbr="' + selectedNoteCurrentLang + '"]').attr('selected', 'selected');
       var q = $('.note-target-language option[data-language-abbr="' + selectedNoteTargetLang + '"]').attr('selected', 'selected');
+
+      $(noteAddToDeck).appendTo($('.language-selection-options'));
 
 
 
@@ -199,6 +199,10 @@ app.NoteView = Backbone.View.extend({
           highlightedText = encodedText;
         }
       });
+
+
+
+
 
       $('.note-translate').on('click', function(){
         var currentLan = $('.note-current-language option:selected').data('language-abbr');
@@ -224,20 +228,30 @@ app.NoteView = Backbone.View.extend({
 
 
     $("#note-overlay").on("click", function(e){
+      e.stopPropagation();
+      e.stopImmediatePropagation();
       var target = $(e.target);
       if (target.is("#note-overlay")) {
+        var appNotesID = $('.noteOverlay').data('postid');
+
+        var changedNote = app.notes.get(appNotesID);
+        // debugger;
+        console.log( changedNote );
+        app.notes.get(appNotesID).attributes.title = $('.noteOverlay').find('.note-title-container').remove('.highlight').text();
+        changedNote.attributes.category = $('.noteOverlay').find('.note-category-container').remove('.highlight').text();
+        changedNote.attributes.content = $('.noteOverlay').find('.note-content-container').remove('.highlight').text();
+
+        changedNote.save();
+
+
         $("#note-overlay").css({"display": "none"})
         var newNotesInfo = $('.noteOverlay').children('.note-details').html();
-        $('.note-translate').remove()
         $('.current-note').children('.note-details').html(newNotesInfo);
+
         $('.noteOverlay').remove();
         $(".note").animate({opacity: 1}, 0.5);
-
-
-        $('selectedNoteId')
-
-
         setbottomMenuOptions();
+        app.appNoteView.render();
       }
     });
 
@@ -254,7 +268,7 @@ app.NoteView = Backbone.View.extend({
       $('.note-edit-options').animate({ opacity: 1 });
     });
 
-    $('.colorOne, .colorTwo, .colorThree, .colorFour, .colorFive, .colorSix').on('click', function(){
+    $('.colorOne, .colorTwo, .colorThree, .colorFour, .colorFive').on('click', function(){
       var selectedColor = $(this).css('background-color');
 
       $(this).closest('.note').css({'background-color': selectedColor});

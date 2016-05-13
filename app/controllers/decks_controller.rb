@@ -1,7 +1,8 @@
 class DecksController < ApplicationController
 
   def index
-    @decks = Deck.all.reverse
+    @users = User.all
+    @decks = current_user.decks.all.reverse
     render :json => @decks
   end
 
@@ -23,10 +24,10 @@ class DecksController < ApplicationController
 
 
   def destroy
-    @notes = current_user.notes.select("id, title, content, category, current_language, target_language").all.order("id DESC")
-    note = Note.find params[:id]
-    note.destroy
-    render :json => @notes
+    @decks = current_user.decks
+    deck = Deck.find params[:id]
+    deck.destroy
+    render :json => @decks
   end
 
   def update

@@ -1,5 +1,5 @@
-
 var app = app || {};
+
 
 $(document).ready(function() {
 
@@ -13,11 +13,6 @@ $(document).ready(function() {
     Backbone.history.start();
 
   });
-
-
-$('#Decks').on('click', function(){
-
-})
 
 
 // Slide out menu
@@ -48,5 +43,23 @@ $(document).ready(function(){
       paddingTop: navHeight
     });
   });
+
+  var sideNavHeight = parseInt($('#side-nav').css('height'));
+  var sideNavContent = parseInt($('.side-menu-list').css('height'));
+  var sideNavFooterHeight = parseInt($('#side-nav-footer').css('height'));
+  var sideNavFinalHeight = (sideNavHeight - sideNavContent) - (sideNavFooterHeight - sideNavContent);
+  var sideNavFooter = $('#side-nav-footer').css({'marginTop': sideNavFinalHeight +'px'});
+
+  
+
+
+  $('#Decks').on('click', function(){
+      window.location = "#decks"
+  })
+
+  $('#Notes').on('click', function(){
+      window.location = "#"
+  })
+
 
 });

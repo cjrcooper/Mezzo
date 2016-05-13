@@ -7,8 +7,22 @@ nav {
   display: block;
 }
 
-.user-buttons {
+.navbar-brand {
+  margin-right: 10px;
+}
 
+.user-buttons {
+  .glyphicon-user{
+    color: white;
+    padding: 5px;
+  }
+  .glyphicon-log-out{
+    color: white;
+    padding: 5px;
+  }
+  a {
+    color: white;
+  }
 }
 
 .navbar {
@@ -27,10 +41,6 @@ nav {
 
 .navbar-toggle {
   margin-left: 50px;
-}
-
-.navbar-brand {
-  margin-right: 50px;
 }
 
 .navbar-form {

@@ -31,8 +31,8 @@ class NotesController < ApplicationController
   end
 
   def update
-      note = Note.find params[:id]
-    if note.save
+    note = Note.find params[:id]
+    if note.update note_params
       current_user.notes << note
       render :json => note
     end
